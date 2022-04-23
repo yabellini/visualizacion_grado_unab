@@ -93,7 +93,7 @@ Algunas geometrías tienen relleno o `fill`, que es similar al `color` pero afec
 
 ```{r ggplot-fill}
 ggplot(temperaturas, ___) +
-  ___(aes(), shape = 21, size = 3) #puntos más grandes para ver mejor las diferencias
+  ___(aes(___), shape = 21, size = 3) #puntos más grandes para ver mejor las diferencias
 ```
 
 
@@ -101,7 +101,7 @@ Ahora probá modificar el gráfico anterior para mapear el relleno (`fill`) a la
 
 ```{r ggplot-fill2}
 ggplot(temperaturas, ___) +
-  ___(aes(), shape = 21, size = 3) #puntos más grandes para ver mejor las diferencias
+  ___(aes(___), shape = 21, size = 3) #puntos más grandes para ver mejor las diferencias
 ```
 
 ## Usando características estéticas como parámetros
