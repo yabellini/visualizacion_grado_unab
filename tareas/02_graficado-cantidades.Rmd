@@ -1,0 +1,230 @@
+---
+#############################################################
+#                                                           #
+# Click on "Run Document" in RStudio to run this worksheet. #
+#                                                           #
+#############################################################
+title: "Visualizando cantidades"
+author: "Claus O. Wilke"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tidyverse)
+library(datos)
+knitr::opts_chunk$set(echo = FALSE, comment = "")
+
+# data prep
+# Data from Box Office Mojo for Dec. 22-24, 2017. 
+boxoffice <- tibble(
+  ranking = 1:5,
+  titulo = c("Star Wars", "Jumanji", "Pitch Perfect 3", "Greatest Showman", "Ferdinand"),
+  cantidad = c(71.57, 36.17, 19.93, 8.81, 7.32) # million USD
+)
+
+pinguinos_sinNA <- na.omit(pinguinos) # remove all rows with any missing values
+```
+
+## Introducción
+
+En este tutorial, revisamos como visualizar cantidades usando barras.
+
+Cómos siempre vamos a usar el paquete **tidyverse**, que incluye la función  `ggplot()` y sus amigos.
+
+```{r library-calls, echo = TRUE, eval = FALSE}
+# carga las librerias necesarias
+library(tidyverse)
+library(datos)
+```
+
+Vamos a trabajar con 2 set de datos. Primero, datos de box-office (o cuanto gana una pelicula cuando se muestra en el cine) entre el 22 y el 24 de diciembre 2017:
+
+```{r boxoffice, echo = TRUE}
+boxoffice
+```
+
+Segundo, datos de pingüinos a los que les sacamos los datos faltantes.
+
+```{r penguins, echo = TRUE}
+pinguinos_sinNA
+```
+
+
+## Graficando valores numéricos como barras
+
+Usando los datos de `boxoffice`, queremos graficar las cantidades (cantidad de ganancias semanales en millones de dólares) para cada película como barras.
+
+```{r boxoffice2, echo = TRUE}
+boxoffice
+```
+
+Por alguna razón, La geometría (o `geom`) de ggplot que nos permite graficar barras en este caso se llama `geom_col()`. (También tenemos `geom_bar()`, pero funciona diferente, ya vimos que *calcula las frecuencias internamente*). Creá un gráfico que muestre `cantidad` en función de `titulo`. Esto significa que `cantidad` va en el eje y, y `titulo` en el eje x.
+
+```{r geom-col, exercise=TRUE}
+ggplot(boxoffice, aes(x = ___, y = ___)) +
+  ___()
+```
+
+```{r geom-col-hint}
+ggplot(boxoffice, aes(x = ___, y = ___)) +
+  geom_col()
+```
+
+```{r geom-col-solution}
+ggplot(boxoffice, aes(x = titulo, y = cantidad)) +
+  geom_col()
+```
+
+Ahora cambia de lugar las variables para graficar `cantidad` en el eje x y `titulo` en el eje y.
+
+```{r geom-col2, exercise=TRUE}
+ggplot(boxoffice, aes(x = ___, y = ___)) +
+  ___()
+```
+
+```{r geom-col2-hint}
+ggplot(boxoffice, aes(x = ___, y = ___)) +
+  geom_col()
+```
+
+```{r geom-col2-solution}
+ggplot(boxoffice, aes(x = cantidad, y = titulo)) +
+  geom_col()
+```
+
+La etiqueta en el eje x debería decir "Ingreso mensual (millones de USD)" y el y no necesita la etiqueta "titulo" porque se entiende con solo ver el nombre de las películas. Usá la función `labs()`, una nueva capa de ggplot para hacer estos cambios en el gráfico.
+
+```{r geom-col3, exercise=TRUE}
+ggplot(boxoffice, aes(x = cantidad, y = titulo)) +
+  geom_col() +
+  ___(x = ___,
+      y = ___)
+```
+
+```{r geom-col3-hint}
+ggplot(boxoffice, aes(x = cantidad, y = titulo)) +
+  geom_col() +
+  labs(x = ___,
+       y = ___)
+```
+
+```{r geom-col3-solution}
+ggplot(boxoffice, aes(x = cantidad, y = titulo)) +
+  geom_col() +
+    labs(x = "Ingreso mensual (millones de USD)",
+         y = NULL) # NULL significa nada, no muestra una etiqueta
+```
+
+## Ordenando barras en el orden correcto
+
+Al generar gráficos, necesitamos pensar cual es el orden correcto en el que se deben organizar las barras. Por defecto, ggplot las ordena alfabéticamente pero en general esto no suele ser lo más apropiado para un gráfico. Si nuestra variable no tiene un orden intrínseco (por ejemplo, un orden temporal), se recomienda ordenar las columnas de acuerdo a la magnitud/cantidad, es decir, ordenar las barras por su alto.
+
+Podemor reordenar las columnas con la función `fct_reorder()`, que requiere dos argumentos: La variable categórica que queremos reordenar y los valores que usaremos de referencia para generar el orden. En este caso, la variable categórica es la columna `titulo`y los valores de referencia están en la columna `cantidad`. Podemos usar `fct_reorder()` directamente dentro de la función `aes()`:
+
+```{r geom-col-sorted, exercise=TRUE}
+ggplot(boxoffice, aes(x = cantidad, y = ___)) +
+  geom_col() +
+  labs(x = "Ingreso mensual (millones de USD)",
+       y = NULL)
+```
+
+```{r geom-col-sorted-hint}
+ggplot(boxoffice, aes(x = cantidad, y = fct_reorder(___, ___))) +
+  geom_col() +
+  labs(x = "Ingreso mensual (millones de USD)",
+       y = NULL)
+```
+
+```{r geom-col-sorted-solution}
+ggplot(boxoffice, aes(x = cantidad, y = fct_reorder(titulo, cantidad))) +
+  geom_col() +
+  labs(x = "Ingreso mensual (millones de USD)",
+       y = NULL)
+```
+
+También podés intentar responder las siguientes preguntas modificando el código anterior:
+
+- ¿Qué pasa si quitás `y = NULL` de la función `labs()`?
+- ¿Podés pintas las barras de color azul?
+- ¿Podés colorear las barras según `cantidad` o `titulo`?
+
+
+## Graficando barras a partir de frecuencias
+
+El dataset `boxoffice` contiene valores individuales, la cantidad de dolares recaudados, que queremos visualizar como barras. Muy frecuentemente nos encontramos en otro escenario: el dataset no contiene los valores individuales (calculados previamente), y en cambio contiene observaciones individuales que tendremos que usar para hacer cálculos. Por ejemplo, revisemos `pinguinos_sinNA`:
+
+```{r penguins2, echo = TRUE}
+pinguinos_sinNA
+```
+
+Contiene información de un pingüino en cada fila. Si queremos hacer un gráfico de barras que muestre el número de pingüinos para cada especie no podremos usar `geom_col()` como antes, porque el dataset no tiene una columna con esa información.
+
+La solución es usar `geom_bar()`, que hace las cuentas necesias internamente y muestra el resultado de esa cuenta o frecuencia. Cómo `geom_bar()` *cuenta* automáticamente, solo necesita saber que columna/variable mapeará al eje x.
+
+Intentalo. Completá el código para graficar el número de pingüinos por especie. Mapea la especie al eje x.
+
+```{r geom-bar, exercise=TRUE}
+ggplot(pinguinos_sinNA, aes(___)) +
+  geom_bar()
+```
+
+```{r geom-bar-hint}
+ggplot(pinguinos_sinNA, aes(x = ___)) +
+  geom_bar()
+```
+
+```{r geom-bar-solution}
+ggplot(pinguinos_sinNA, aes(x = species)) +
+  geom_bar()
+```
+
+Ahora intentá las siguientes modificaciones usando el código anterior:
+
+- Mapeá la especie al eje y.
+- Eliminá la etiqueta "especie" del eje.
+- Cambiá el orden de las barras manualmente usando `fct_relevel()`.
+
+
+## Contando subgrupos
+
+`geom_bar()` cuenta automáticamente cuantas ocurrencias encuentra para cada combinación de variables categóricas. En el ejemplo anterior usamos una sola categoría, la  `especie`. Pero podríamos agregar una segunda variable, por ejemplo `sexo`. En este caso `geom_bar()` contará el numero de casos para cada combinación de especie y sexo y graficará columnas para cada grupo por separado. Intentá esto mapeado el `sexo` al relleno o `fill` de las barras. 
+
+```{r geom-bar2, exercise=TRUE}
+ggplot(pinguinos_sinNA, aes(x = especie, fill = ___)) +
+  geom_bar()
+```
+
+```{r geom-bar2-solution}
+ggplot(pinguinos_sinNA, aes(x = especie, fill = sexo)) +
+  geom_bar()
+```
+
+Por defecto, las barras con distinto relleno se graficaran una sobre la otra. Pero hay otras posibiliadades de posición que se contrlan con el argumento `position` dentro de la función `geom_bar()`. Por ejemplo, probá la posición `"dodge"`.
+
+```{r geom-bar-position, exercise=TRUE}
+ggplot(pinguinos_sinNA, aes(x = especie, fill = ___)) +
+  geom_bar(___)
+```
+
+```{r geom-bar-position-hint}
+ggplot(pinguinos_sinNA, aes(x = especie, fill = sexo)) +
+  geom_bar(position = ___)
+```
+
+```{r geom-bar-position-solution}
+ggplot(pinguinos_sinNA, aes(x = especie, fill = sexo)) +
+  geom_bar(position = "dodge")
+```
+
+Usando el código anterior probá las siguientes opciones de posición: `"stack"` y `"fill"`.
+
+```{r position-question}
+question('¿Que hace la posición `"fill"`?',
+  answer("Pone barras con distinto color de relleno una al lado de la otra."),
+  answer("Pone barras con distinto color de relleno una encima de la otra."),
+  answer("Pone barras con distinto color de relleno una encima de la otra, y normaliza la altura de cada grupo de barras para que sumen 1.", correct = TRUE),
+  answer("Pone las barras con distinto color de relleno una encima de la otra y normaliza la suma de TODAS las barras a 1.")
+)
+```
