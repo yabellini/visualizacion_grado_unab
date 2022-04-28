@@ -1,0 +1,63 @@
+---
+title: "Graficos de Barra"
+author: "Yanina"
+date: '2022-04-28'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(datos)
+library(tidyverse)
+```
+
+Vamos a trabajar con el conjunto de datos de `diamantes` para generar gráficos de barras. 
+
+```{r}
+diamantes
+```
+
+Este dataset no tiene valores calculados, por lo que vamos a utilizar `geom_bar()` para que se calculen las frecuencias y proporciones de forma automática.
+
+Este es el código para poder tener la cantidad de diamantes por cada tipo de corte. Ejecutalo y mirá como queda el gráfico.
+
+```{r}
+diamantes %>% 
+  ggplot(aes(x=corte)) + #Solo determinamos x porque y la calcula ggplot internamente
+  geom_bar()
+```
+
+¿Cómo tenemos que modificar el código siguiente para que nos muestre la proporción (prop) en vez de la cantidad (count)
+
+```{r}
+diamantes %>% 
+  ggplot(aes(x=corte)) + 
+  geom_bar(aes(y = stat(________), ______ = 1))
+```
+
+Los gráficos de barra pueden tener las barras con colores que se mapean a otra variable del conjunto de datos.  ¿Cómo modificarias este código para que las barras muestren con diferentes colores la claridad?
+
+```{r}
+diamantes %>% 
+  ggplot(aes(x=corte))+ 
+  geom_bar(_______(_______ = claridad))
+
+```
+
+¿Cómo se modifica el código anterior para que las barras de cada claridad se presente una al lado de la otra dentro de cada corte en vez de una arriba de la otra como el código anterior?
+
+```{r}
+diamantes %>% 
+  ggplot(aes(x=corte))+ 
+  geom_bar(_______(_______ = claridad), position = "___________")
+
+```
+
+Ahora hagamos este mismo gráfico pero con proporciones de `claridad` en cada `corte`:
+
+```{r}
+diamantes %>% 
+  ggplot(aes(x=corte))+ 
+  geom_bar(___________________________)
+
+```
