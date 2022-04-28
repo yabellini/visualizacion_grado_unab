@@ -1,9 +1,9 @@
 ---
-#############################################################
-#                                                           #
-# Click on "Run Document" in RStudio to run this worksheet. #
-#                                                           #
-#############################################################
+#########################################################################
+#                                                                       #
+# Hacé click en "Run Document" en RStudio para ejecutar ester documento #
+#                                                                       #
+#########################################################################
 title: "Visualizando cantidades"
 author: "Claus O. Wilke"
 output: learnr::tutorial
