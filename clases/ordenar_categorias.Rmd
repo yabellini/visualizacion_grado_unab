@@ -49,7 +49,7 @@ ggplot(diamantes, aes(color)) +
 ```
 El orden está definido por los niveles de la variable color que ya es de por si tipo factor. En este caso D es el mejor color posible y J es el peor. 
 
-Modifíca el gráfico anterior para ordenar las distintas categorías de color de manera aleatora (es decir, como más te guste).
+Modifíca el gráfico anterior para ordenar las distintas categorías de color de manera aleatoria (es decir, como más te guste).
 
 ```{r}
 ggplot(diamantes, aes(________)) +

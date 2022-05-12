@@ -1,0 +1,126 @@
+---
+title: "Factores"
+author: "Pao Corrales"
+date: "4/29/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(datos)
+```
+
+## Factores a secas
+
+```{r}
+mes <- c("Dic", "Abr", "Ene", "Mar")
+
+sort(mes)
+
+mes[5] <- "Eme"
+
+mes
+```
+Factores:
+
+* orden definido (distinto al alfabetico)
+* las categorias estan predefinidas
+
+```{r}
+niveles_meses <- c(
+  "Ene", "Feb", "Mar", "Abr", "May", "Jun",
+  "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+)
+
+mes2 <- factor(c("Dic", "Abr", "Ene", "Mar"), levels = niveles_meses)
+mes2
+
+sort(mes2)
+
+mes2[5] <- "Eme"
+mes2
+```
+
+## Forcats para trabajar con factores
+
+```{r}
+ggplot(pinguinos, aes(y = especie)) +
+  geom_bar()
+```
+
+### fct_relevel()
+
+Ordena niveles de manera **manual**
+
+```{r}
+ggplot(pinguinos, aes(y = fct_relevel(especie, "Adelia", "Papúa", "Barbijo"))) +
+  geom_bar()
+
+```
+
+### fct_infreq()
+
+Ordena niveles de acuerdo a una **frecuencia**
+
+```{r}
+ggplot(pinguinos, aes(y = fct_infreq(especie))) +
+  geom_bar()
+```
+
+Cambiar el orden:
+
+```{r}
+ggplot(pinguinos, aes(y = fct_rev( fct_infreq(especie)))) +
+  geom_bar()
+```
+
+```{r}
+paises %>% 
+  filter(anio == 2007, continente == "Américas") %>% 
+  ggplot(aes(esperanza_de_vida, pais)) +
+  geom_point()
+```
+
+### fct_reorder
+
+Ordena los niveles de acuerdo a otra variable.
+
+```{r}
+paises %>% 
+  filter(anio == 2007, continente == "Américas") %>% 
+  mutate(pais = fct_reorder(pais, esperanza_de_vida)) %>% 
+  ggplot(aes(esperanza_de_vida, pais)) +
+  geom_point()
+```
+
+### fct_lump()
+
+Agrupa niveles poco frecuentes. 
+
+```{r}
+ggplot(pinguinos, aes(y = fct_lump(especie, 1, other_level = "Otro"))) +
+  geom_bar()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
