@@ -1,0 +1,44 @@
+---
+title: "Tarea: Graficando barras"
+---
+
+```{r global_options, include=FALSE}
+library(knitr)
+library(tidyverse)
+opts_chunk$set(fig.align="center", fig.height=4, fig.width=5.5)
+
+# Preparación de los datos:
+txhouse <- txhousing %>%
+  filter(city %in% c('Austin', 'Houston', 'San Antonio', 'Dallas')) %>%
+  filter(year %in% c('2000', '2005', '2010', '2015')) %>%
+  group_by(city, year) %>%
+  summarize(total_sales = sum(sales))
+  
+```
+
+
+**Problema 1:** Vamos a trabajar con el dataset `txhouse` que ha sido derivado del dataset `txhousing` que viene con **ggplot2**. En este sitio pueden ver más detalles del conjunto de datos: https://ggplot2.tidyverse.org/reference/txhousing.html. `txhouse` contiene tres columnas: `city` (tiene cuatro ciudades de Texas), `year` (contiene datos de cuatro años: entre 2000 y 2015) y `total_sales` que indica el total de ventas en el año y ciudad especificados.
+
+```{r}
+txhouse
+```
+
+Usar ggplot para hacer un gráfico de barras de las ventas totales de viviendas (columna `total_sales`) para cada ciudad (comluna `city`) y mostrar un panel por cada año (columna `year`). Pista: usa `facet_wrap()`. 
+
+
+```{r}
+# tu código va aquí
+```
+
+**Problema 2:** Usar ggplot para hacer un gráfico de barras de las ventas totales de viviendas (columna `total_sales`) para cada año (columna `year`), los bordes de las barras deben ser "gray34" y el relleno de las barras se debe realizar por ciudad (columna `city`). 
+
+```{r}
+# tu código va aquí
+```
+
+**Problema 3:** modifica el gráfico del problema 2 colocando las barras de las "ciudades" una al lado de la otra, en lugar de apilarlas. A continuación, reordene las barras para cada "año" por "ventas totales" (`total_sales`) en orden descendente. 
+
+
+```{r}
+# tu código va aquí
+```
