@@ -6,6 +6,7 @@ Docentes: Paola Corrales y Yanina Bellini Saibene
 ### Cronograma de clases
 
 |Fecha | Tema |
+|------|------|
 |08/04/2022 | Presentación de la materia y la visualización de datos|
 |15/04/2022 | FERIADO| 
 |22/04/2022 |Introducción a ggplot2. Mapear datos a elementos de un gráfico|
