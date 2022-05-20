@@ -1,0 +1,66 @@
+---
+title: "La evolución de -----"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(datos)
+
+paises_latinoamerica <- paises %>% 
+  filter(pais %in% c("Argentina", "Brasil", "Uruguay", "Chile"))
+
+temperatura_diaria <- clima %>% 
+  group_by(tiempo = lubridate::make_date(anio, mes, dia), origen) %>% 
+  mutate(temperatura = mean(temperatura)) 
+```
+
+Vamor a seguir trabajando con datos del paquete datos, esta vez derivados o filtrados para poner el foco en visualizar series temporales. 
+
+Por un lado tenemos `paises_latinoamerica` con la información del pbi per capita a lo largo del tiempo para algunos paises de Latino América
+
+```{r}
+paises_latinoamerica
+```
+
+Por el otro, la temperatura media diaria para distintos aeropuertos derivados del dataset `clima`. 
+
+```{r}
+temperatura_diaria
+```
+
+En el siguiente bloque de código intentá reproducir el gráfico 1 usando los datos en `paises_latinoamerica`.
+
+```{r}
+ggplot(paises_latinoamerica, aes(anio, pib_per_capita)) +
+  geom_line(aes(color = pais)) +
+  geom_point(aes(color = pais, shape = pais)) +
+  labs(title = "Evolución del PBI per capital",
+       x = "Año",
+       y = "PBI per capita (millones)",
+       color = NULL,
+       shape = NULL)
+```
+
+Ayudita:
+
+* Para eliminar una etiqueta podemos usar `NULL` (o nada).
+* Se puede mapear la misma variable a más de una característica estética.
+
+Ahora intentá recrear el gráfico 2 pero usando `temperatura_diaria`.
+
+```{r}
+ggplot(temperatura_diaria, aes(tiempo, temperatura)) +
+  geom_line(aes(color = origen)) +
+  scale_x_date(date_labels = "%B") +
+  facet_wrap(vars(origen), ncol = 1)
+```
+
+Ayuditas:
+
+* Probá agregar la capa `scale_x_date(date_labels = "%B")` al gráfico. (Spoiler de próximas clases!)
+* `facet_wrap()` tiene un argumento que permite defininar la cantidad de columnas en las que se organizan los paneles. 
+
+Finalmente, ¿que podríamos mejorar de esto gráficos? Hace una lista. 
