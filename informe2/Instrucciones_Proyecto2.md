@@ -1,12 +1,25 @@
 ## Informe práctico 2 - Instrucciones
 
-Por favor, utiliza la plantilla R Markdown provista para completar su informe. 
+Por favor, utiliza la plantilla R Markdown provista para completar el informe. 
 
 El resultado del documento R Markdown (en formato HTML) y el archivo R Markdown sin procesar (como .Rmd) deben ser subidos al campus antes de las 11:55 pm del 27 de mayo de 2022. Estos dos documentos se calificarán en conjunto, por lo que deben ser coherentes (es decir, no cambies el archivo R Markdown sin actualizar también el documento HTML).
 
 Todos los resultados presentados deben tener su código correspondiente. Cualquier respuesta/resultado presentado sin el correspondiente código R que generó el resultado no se considerará. Para ser claros: si haces los cálculos a mano en lugar de usar R y luego reportas los resultados de los cálculos, no recibirás puntos por esos cálculos. Todo el código reportado en el documento final del proyecto debe correr sin errores. Por favor, no incluyas ningún código extraño o que produzca mensajes de error (el código que produce advertencias es aceptable, siempre y cuando entiendas lo que significan las advertencias).
 
-Para este informe, utilizarás un conjunto de datos de La base de datos `meteoritos` contiene información de impactos de meteoritos y su fuente es la NASA. Contiene información sobre más de 45.000 meteoritos, incluyendo su nombre, ubicación, masa y año de impacto. 
+Para este informe, utilizarás la base de datos `meteoritos` que contiene información de impactos de meteoritos y su fuente es la NASA. Incluye información sobre más de 45.000 meteoritos, incluyendo su nombre, ubicación, masa y año de impacto. 
+
+|variable    |clase     |descripción |
+|:---|:---|:-----------|
+|name        |character | Nombre del meteorito |
+|id          |double    | ID numerico del meteorito |
+|name_type   |character | Tipo de nombre, valid (válido) o relict (un meteorito que no puede ser asignado fácilmente a una clase) |
+|class       |character | Clase del meteorito, más detalles en [Wikipedia](https://en.wikipedia.org/wiki/Meteorite_classification) |
+|mass        |double    | Masa en gramos |
+|fall        |character | Fell (alguien vio caer el meteorito) o Found (alguien lo encontró) |
+|year        |integer   | Año |
+|lat         |double    | Latitud |
+|long        |double    | Longitud |
+|geolocation |character | Geolocalización |
 
 Este informe constará de dos partes. Cada parte debe estar estructurada de la siguiente manera:
 
@@ -31,9 +44,9 @@ Una de las visualizaciones de esta sección debe ser un mapa.
 Para cada gráfico, explicá claramente por qué este gráfico (por ejemplo, diagrama de caja, diagrama de barras, histograma, etc.) 
 es el mejor para proporcionar la información sobre la que se pregunta. 
 Los dos gráficos deben ser de diferentes tipos. 
-Al menos uno de ellos debe mapear datos al color o la forma.  También debe tener en cuenta aspectos de accesibilidad
+Al menos uno de ellos debe mapear datos al color o la forma.  También debe tener en cuenta aspectos de accesibilidad (ver nota al final).
 
-n la sección de Análisis, incluí el código que genera sus gráficos. Utilizá las funciones necesarias para agregar etiquetas de ejes y guías agradables. Podés utilizar funciones de tema para personalizar la apariencia de su gráfico, pero no está obligado a hacerlo. Todos los gráficos deben hacerse con ggplot2.
+En la sección de Análisis, incluí el código que genera sus gráficos. Utilizá las funciones necesarias para agregar etiquetas de ejes y guías agradables. Podés utilizar funciones de tema para personalizar la apariencia de su gráfico, pero no está obligado a hacerlo. Todos los gráficos deben hacerse con ggplot2.
 
 En la sección Discusión, interpretá los resultados del análisis. Identificá cualquier tendencia revelada (o no revelada) por los gráficos. Especulá acerca de por qué los datos tienen el aspecto que tienen.
 
@@ -50,3 +63,5 @@ Respondé a tu pregunta interpretando tus gráficos e identificando las tendenci
 **Los gráficos no pueden ser los mismos que los utilizados en la parte 1**
 
 Una de las visualizaciones debe ser una tabla.
+
+Nota: todas las figuras deberan tener su texto alternativo (o alt text) que describe su contenido.

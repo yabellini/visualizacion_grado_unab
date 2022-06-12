@@ -12,7 +12,7 @@ meteoritos <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience
 
 ```
 
-La base de datos `meteoritos` contiene información de impactos de meteoritos y su fuente es la NASA. Contiene información sobre más de 45.000 meteoritos, incluyendo su nombre, ubicación, masa y año de impacto. 
+La base de datos `meteoritos` contiene información de impactos de meteoritos y su fuente es la NASA. Incluye información sobre más de 45.000 meteoritos, incluyendo su nombre, ubicación, masa y año de impacto. 
 
 ### **Parte 1**
 
