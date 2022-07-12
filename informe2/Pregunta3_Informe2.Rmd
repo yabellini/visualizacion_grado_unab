@@ -1,0 +1,54 @@
+---
+title: "Pregunta 3 Informe2"
+author: "Yanina y Paola" #Poner los nombres de las personas del grupo aquí
+date: '2022-07-12'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+meteoritos <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-11/meteorites.csv")
+
+```
+
+## Gráficos compuestos
+
+Utilizando el conjunto de datos de `meteoritos`, el objetivo de esta actividad es generar un _gráfico compuesto_ con los siguientes cuatro gráficos:
+
+* Un mapa presentando _solo los meteoritos `Fell`_, con el _tamaño del punto de acuerdo a su masa_,
+
+* Al lado del primer mapa, otro mapa presentando _solo los meteoritos `Found`_, con el _tamaño del punto de acuerdo a su masa_.
+
+* _Debajo_ del _primer mapa_ un _gráfico de lineas_ mostrando la _evolución en el tiempo de solo los meteoritos `Fell`_
+
+* _Debajo_ del _segundo mapa_ un _gráfico de lineas_ mostrando la _evolución en el tiempo de los meteoritos `Found`_
+
+
+El gráfico debe tener todas las anotaciones correspondientes y el texto alternativo.
+
+Aplicarle un tema personalizado que tenga en cuenta las escalas de colores para que sean accesibles (y expliquen cual usaron y porqué)
+
+```{r}
+# Tú codigo va a aquí
+```
+
+
+### Escala de colores
+
+> tu explicación del uso de escala de colores y porqué va aquí
+
+
+## Tablas
+
+Generar una tabla que presente el registro más antiguo de la base de datos.  
+
+Poner los nobres de las columnas en español con _cursiva_, colorear con _azul_ la _masa_ del meterito y poner en _negrita_ el _año_.
+
+
+```{r}
+# Tú codigo va a aquí
+```
+
