@@ -43,7 +43,7 @@ Aplicarle un tema personalizado que tenga en cuenta las escalas de colores para 
 
 ## Tablas
 
-Generar una tabla que presente el registro más antiguo de la base de datos.  
+Generar una tabla que presente los 5 registros más antiguos de la base de datos.  
 
 Poner los nobres de las columnas en español con _cursiva_, colorear con _azul_ la _masa_ del meterito y poner en _negrita_ el _año_.
 
