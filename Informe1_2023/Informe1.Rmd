@@ -7,15 +7,17 @@ output: html_document
 library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE)
 
-paquetes_cran <- readr::read_csv("https://raw.githubusercontent.com/cienciadedatos/datos-de-miercoles/master/datos/2019/2019-07-03/paquetes_CRAN.csv")
+runiverse <- readr::read_csv("https://raw.githubusercontent.com/yabellini/visualizacion_grado_unab/main/datos/runiverse.csv")
 
 ```
 
-La base de datos `paquetes_cran` contiene información sobre los paquetes publicados en CRAN desde 2006 a 2019. Podés encontrar más información sobre el conjunto de datos [aquí](https://github.com/cienciadedatos/datos-de-miercoles/blob/master/datos/2019/2019-07-03/README.md).
+La base de datos `runiverse` contiene información sobre los paquetes publicados en R-Universe a Abril de 2023 de 
+la empresa RStudio y la organización rOpenSci. 
 
 ### **Parte 1**
 
-**Pregunta:** ¿Cómo se comporta la cantidad de paquetes publicados en CRAN a través de los años?, ¿existe alguna tendencia con respecto del idioma de los paquetes? 
+**Pregunta:** ¿Cuáles y cuantos son los tipos de licencias utilizados en los paquetes?, 
+¿existe algun comportamiento particular en el uso de licencias entre las empresas? 
 
 
 **Introducción:** *Tu introducción va aqui*
