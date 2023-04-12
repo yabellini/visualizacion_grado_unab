@@ -21,8 +21,6 @@ Cada registro (fila) contiene información que incluye:
 
 Variable       |Clase               |Descripción |
 |:--------------|:-------------------|:-----------|
-
-         
 | Package | caracter | Nombre del paquete |
 | Type | caracter |  | Es un paquete o no|
 | Title | caracter | Versión de R y otros paquetes de los que depende |
